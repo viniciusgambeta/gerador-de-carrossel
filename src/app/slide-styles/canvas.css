@@ -1,0 +1,619 @@
+/* ─────────── Canvas (inspired by Figma's design system) ─────────── */
+.slide[data-style="canvas"] {
+  --font-head: var(--font-ui);
+  --select: #0d99ff;
+  --component: #9747ff;
+  --redline: #f24822;
+  --cv-line: rgb(0 0 0 / 0.09);
+  --cv-dot: rgb(0 0 0 / 0.13);
+  --cv-track: #e6e6e6;
+  --cv-bar: #d9d9d9;
+  --cv-selected: #e5f4ff;
+}
+/* Dark canvas */
+.slide[data-style="canvas"][data-ink="light"] {
+  --cv-line: rgb(255 255 255 / 0.1);
+  --cv-dot: rgb(255 255 255 / 0.12);
+  --cv-track: #383838;
+  --cv-bar: #4a4a4a;
+  --cv-selected: rgb(13 153 255 / 0.22);
+}
+.slide[data-style="canvas"] .slide-decor {
+  display: none;
+}
+.slide[data-style="canvas"] .display {
+  letter-spacing: -0.035em !important;
+}
+/* Highlights read as selected text */
+.slide[data-style="canvas"] .hl {
+  color: inherit;
+  background: rgb(13 153 255 / 0.3);
+  padding: 0 0.04em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+.slide[data-style="canvas"] :is(.slide-source, .slide-page, .slide-handle, .slide-next) {
+  font-size: 21px;
+  font-weight: 500;
+}
+.slide[data-style="canvas"] .slide-handle img {
+  border-radius: 50%;
+}
+
+/* The dotted canvas */
+.cv-dots {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(circle, var(--cv-dot) 1.7px, transparent 2.1px);
+  background-size: 34px 34px;
+  background-position: 17px 17px;
+}
+
+/* Selection: box, handles, live size */
+.cv-sel {
+  position: relative;
+}
+.fitbox > .cv-sel {
+  margin-left: 8px;
+  margin-right: 8px;
+}
+.cv-hug {
+  align-self: flex-start;
+}
+.cv-sel-box {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border: 2px solid var(--select);
+  pointer-events: none;
+}
+.cv-h {
+  position: absolute;
+  z-index: 3;
+  width: 14px;
+  height: 14px;
+  background: #ffffff;
+  border: 2px solid var(--select);
+  pointer-events: none;
+}
+.cv-h-tl {
+  top: -6px;
+  left: -6px;
+}
+.cv-h-tr {
+  top: -6px;
+  right: -6px;
+}
+.cv-h-bl {
+  bottom: -6px;
+  left: -6px;
+}
+.cv-h-br {
+  bottom: -6px;
+  right: -6px;
+}
+.cv-badge {
+  position: absolute;
+  z-index: 3;
+  left: 50%;
+  top: calc(100% + 12px);
+  translate: -50% 0;
+  padding: 4px 10px 5px;
+  border-radius: 4px;
+  background: var(--select);
+  color: #ffffff;
+  font-family: var(--font-ui);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+/* Frames: square, white, named above the corner */
+.cv-frame {
+  position: relative;
+  padding: 44px 48px 48px;
+  background: var(--surface);
+  color: var(--fg);
+  box-shadow: 0 0 0 1px var(--cv-line);
+}
+.fitbox > .cv-frame {
+  margin-top: 36px;
+}
+.cv-frame-name {
+  position: absolute;
+  left: 0;
+  bottom: calc(100% + 10px);
+  font-family: var(--font-ui);
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: 0;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.cv-frame-component {
+  box-shadow: 0 0 0 2px var(--component);
+}
+.cv-frame-component .cv-frame-name {
+  color: var(--component);
+  font-weight: 600;
+}
+.cv-layer-icon {
+  display: grid;
+  place-items: center;
+  width: 84px;
+  height: 84px;
+  background: rgb(151 71 255 / 0.12);
+  color: var(--component);
+}
+/* Component instances (eyebrows) in purple */
+.slide .cv-component {
+  color: var(--component);
+  font-weight: 600;
+  letter-spacing: 0;
+}
+.slide .cv-component::before {
+  content: "❖";
+  margin-right: 0.45em;
+}
+
+/* Text being typed: thin box and a caret at the end */
+.cv-textbox {
+  outline: 1.5px solid var(--select);
+  outline-offset: 12px;
+}
+.slide .cv-typing::after {
+  content: "";
+  display: inline-block;
+  width: 4px;
+  height: 0.92em;
+  margin-left: 0.08em;
+  vertical-align: -0.1em;
+  background: var(--select);
+}
+
+/* Red spacing measure */
+.cv-gap {
+  position: relative;
+  flex: none;
+  margin-left: 36px;
+}
+.cv-gap i {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--redline);
+}
+.cv-gap i::before,
+.cv-gap i::after {
+  content: "";
+  position: absolute;
+  left: -6px;
+  width: 14px;
+  height: 2px;
+  background: var(--redline);
+}
+.cv-gap i::before {
+  top: 0;
+}
+.cv-gap i::after {
+  bottom: 0;
+}
+.cv-gap span {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  translate: 0 -50%;
+  padding: 2px 8px 3px;
+  border-radius: 4px;
+  background: var(--redline);
+  color: #ffffff;
+  font-family: var(--font-ui);
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+/* Collaborators */
+.cv-cursor {
+  position: absolute;
+  z-index: 4;
+  display: flex;
+  align-items: flex-start;
+  pointer-events: none;
+}
+.cv-cursor svg {
+  filter: drop-shadow(0 2px 3px rgb(0 0 0 / 0.25));
+}
+.cv-cursor span {
+  margin: 34px 0 0 -8px;
+  padding: 5px 12px 6px;
+  border-radius: 4px;
+  color: #ffffff;
+  font-family: var(--font-ui);
+  font-size: 21px;
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+/* Comments */
+.cv-comment {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+}
+.cv-pin {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50% 50% 50% 0;
+  border: 3px solid #ffffff;
+  color: #ffffff;
+  font-family: var(--font-ui);
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.22);
+}
+.cv-comment-card {
+  flex: 1;
+  min-width: 0;
+  padding: 22px 28px 26px;
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--fg);
+  box-shadow:
+    0 0 0 1px var(--cv-line),
+    0 8px 26px rgb(0 0 0 / 0.1);
+}
+.cv-comment-head {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 10px;
+  font-family: var(--font-ui);
+  font-size: 22px;
+  line-height: 1.2;
+}
+.cv-comment-head b {
+  font-weight: 700;
+}
+.cv-comment-head span {
+  color: var(--muted);
+}
+
+/* Cover: the photo in crop mode */
+.cv-crop-ghost {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 760px;
+  overflow: hidden;
+  opacity: 0.3;
+}
+.cv-crop {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+.slide .cv-caption {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Fill settings floating over the photo */
+.cv-inspector {
+  position: absolute;
+  z-index: 4;
+  width: 320px;
+  padding: 16px 0 12px;
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--fg);
+  font-family: var(--font-ui);
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.2;
+  box-shadow:
+    0 0 0 1px var(--cv-line),
+    0 12px 32px rgb(0 0 0 / 0.2);
+}
+.cv-inspector-head {
+  padding: 0 22px 12px;
+  font-weight: 700;
+}
+.cv-inspector-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 22px;
+}
+.cv-inspector-row span {
+  flex: 1;
+}
+.cv-inspector-row em {
+  font-style: normal;
+  color: var(--muted);
+}
+.cv-swatch {
+  flex: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 4px;
+  background: linear-gradient(135deg, #ffcd29, #f24822 45%, #0d99ff);
+}
+
+/* Quote */
+.cv-quote-mark {
+  height: 84px;
+  font-size: 190px;
+  font-weight: 700;
+  line-height: 0.75;
+  color: var(--accent);
+}
+.cv-person {
+  display: flex;
+  align-items: center;
+  gap: 34px;
+}
+.cv-avatar-sel {
+  flex: none;
+}
+.cv-avatar {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--component);
+  color: #ffffff;
+  font-size: 46px;
+  font-weight: 700;
+}
+
+/* Text toolbar */
+.cv-toolbar {
+  flex: none;
+  align-self: flex-start;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  height: 62px;
+  padding: 0 24px;
+  border-radius: 8px;
+  background: #2c2c2c;
+  color: #ffffff;
+  font-family: var(--font-ui);
+  font-size: 21px;
+  font-weight: 500;
+  line-height: 1;
+  box-shadow:
+    0 0 0 1px rgb(255 255 255 / 0.08),
+    0 8px 24px rgb(0 0 0 / 0.2);
+}
+.cv-toolbar i {
+  width: 1px;
+  height: 28px;
+  background: rgb(255 255 255 / 0.2);
+}
+.cv-toolbar b {
+  font-weight: 800;
+}
+.cv-toolbar em {
+  font-style: italic;
+  font-family: Georgia, serif;
+}
+.cv-toolbar u {
+  text-decoration: underline;
+}
+.cv-toolbar-color {
+  width: 26px;
+  height: 26px;
+  border-radius: 4px;
+  background: var(--select);
+}
+
+/* Number: a meter with its value measured */
+.cv-meter {
+  flex: none;
+  height: 28px;
+  background: var(--cv-track);
+}
+.cv-meter i {
+  position: relative;
+  display: block;
+  height: 100%;
+  background: var(--select);
+}
+.cv-meter span {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 10px);
+  padding: 3px 9px 4px;
+  border-radius: 4px;
+  background: var(--redline);
+  color: #ffffff;
+  font-family: var(--font-ui);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+/* List: the layers panel */
+.cv-panel {
+  padding: 8px 0 14px;
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--fg);
+  box-shadow:
+    0 0 0 1px var(--cv-line),
+    0 10px 30px rgb(0 0 0 / 0.08);
+}
+.cv-panel-head {
+  display: flex;
+  justify-content: space-between;
+  padding: 14px 30px 16px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid var(--cv-line);
+  font-family: var(--font-ui);
+  font-size: 22px;
+  line-height: 1.2;
+}
+.cv-panel-head span {
+  color: var(--muted);
+}
+.cv-layer {
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  gap: 16px;
+  align-items: baseline;
+  padding: 16px 30px;
+}
+.cv-layer-on {
+  background: var(--cv-selected);
+}
+.cv-layer-glyph {
+  font-family: var(--font-plex-mono), monospace;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1;
+  text-align: center;
+  color: var(--muted);
+}
+.cv-layer-on .cv-layer-glyph {
+  color: var(--select);
+}
+
+/* Grid: one frame per item */
+.cv-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 66px 30px;
+  /* Room for the selected frame's handles */
+  margin: 0 8px;
+}
+.cv-cell {
+  padding: 32px 32px 36px;
+}
+.cv-cell > svg {
+  color: var(--select);
+}
+
+/* Chart: named rectangles */
+.cv-bars {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  column-gap: 28px;
+  row-gap: 10px;
+  align-items: center;
+}
+.slide .cv-bar-name {
+  grid-column: 1 / -1;
+  margin-top: 18px;
+  font-weight: 500;
+  color: var(--muted);
+}
+.slide .cv-bar-name:first-child {
+  margin-top: 0;
+}
+.cv-bar {
+  display: block;
+  height: 64px;
+  background: var(--cv-bar);
+}
+.cv-bar-top {
+  background: var(--select);
+}
+
+/* Call to action: the blue button */
+.cv-button {
+  display: inline-grid;
+  place-items: center;
+  width: 124px;
+  height: 124px;
+  border-radius: 12px;
+  background: var(--select);
+  color: #ffffff;
+}
+.slide[data-style="canvas"] .cta-pointer {
+  color: var(--select);
+}
+
+/* The formats it does not recompose: square white layers on the canvas */
+.slide[data-style="canvas"] :is(.list-row, .grid-card, .duo-card, .compare-card, .diagram-node, .qa-bubble, .cta-summary, .note-box) {
+  background: var(--surface);
+  color: var(--fg);
+  border: none;
+  border-radius: 4px;
+  box-shadow: 0 0 0 1px var(--cv-line) !important;
+}
+.slide[data-style="canvas"] :is(.compare-card.on-accent, .diagram-node.on-accent) {
+  background: var(--select);
+  color: #ffffff;
+}
+.slide[data-style="canvas"] .icon-bubble {
+  background: var(--cv-selected);
+  color: var(--select);
+  border-radius: 6px;
+}
+.slide[data-style="canvas"] :is(.kicker, .kicker-pill) {
+  color: var(--component);
+  background: none;
+  padding: 0;
+  text-transform: none;
+  letter-spacing: 0;
+  font-weight: 600;
+}
+.slide[data-style="canvas"] :is(.rounded-photo, .text-photo, .quote-photo) {
+  border-radius: 0;
+  outline: 2px solid var(--select);
+}
+.slide[data-style="canvas"] :is(.step-num, .timeline-dot) {
+  background: var(--select);
+  color: #ffffff;
+  border-radius: 4px;
+  box-shadow: none;
+}
+.slide[data-style="canvas"] .timeline-dot {
+  border-radius: 50%;
+}
+.slide[data-style="canvas"] .bar {
+  background: var(--cv-track);
+  border-radius: 0;
+}
+.slide[data-style="canvas"] :is(.bar-top, .stat-bar > div) {
+  background: var(--select);
+}
+.slide[data-style="canvas"] :is(.compare-vs, .vs-badge) {
+  background: var(--select);
+  color: #ffffff;
+  border-radius: 4px;
+}
+.slide[data-style="canvas"] .cta-icon {
+  background: var(--select);
+  color: #ffffff;
+  border-radius: 12px;
+}
+.slide[data-style="canvas"] .question-mark {
+  color: var(--select);
+  -webkit-text-stroke: 0;
+  opacity: 0.12;
+}

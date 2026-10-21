@@ -1,0 +1,11 @@
+node_modules
+.next
+out
+*.tsbuildinfo
+next-env.d.ts
+.env
+.env*.local
+.cache
+.claude
+# Review sheets show the author's profile on the slides
+previews

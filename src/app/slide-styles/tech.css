@@ -1,0 +1,403 @@
+/* ─────────── Interface (tech) ─────────── */
+.slide[data-style="tech"] {
+  --font-head: var(--font-space-grotesk);
+  --font-ui: var(--font-space-grotesk);
+  --win: color-mix(in srgb, var(--fg) 6%, var(--bg));
+  --win-bar: color-mix(in srgb, var(--fg) 10%, var(--bg));
+  --win-line: color-mix(in srgb, var(--accent) 40%, transparent);
+  --glow: 0 0 46px -12px color-mix(in srgb, var(--accent) 60%, transparent);
+}
+.slide[data-style="tech"][data-ink="dark"] {
+  --win: #ffffff;
+  --win-bar: #f4f6f9;
+  --win-line: rgb(14 20 32 / 0.12);
+  --glow: 0 24px 50px -24px rgb(14 20 32 / 0.35);
+}
+.slide[data-style="tech"] .display {
+  letter-spacing: -0.035em !important;
+}
+.slide[data-style="tech"] .slide-decor {
+  display: none;
+}
+.tech-grid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(color-mix(in srgb, var(--accent) 9%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--accent) 9%, transparent) 1px, transparent 1px);
+  background-size: 60px 60px;
+  -webkit-mask-image: linear-gradient(to bottom, transparent, black 25%, black 70%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, black 25%, black 70%, transparent);
+}
+.slide[data-style="tech"][data-ink="dark"] .tech-grid {
+  background-image:
+    linear-gradient(rgb(14 20 32 / 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(14 20 32 / 0.05) 1px, transparent 1px);
+}
+.tech-glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 92% 6%, color-mix(in srgb, var(--accent) 26%, transparent), transparent 40%),
+    radial-gradient(circle at 0% 100%, color-mix(in srgb, var(--primary) 30%, transparent), transparent 46%);
+}
+.slide[data-style="tech"][data-ink="dark"] .tech-glow {
+  opacity: 0.45;
+}
+.slide[data-style="tech"] .hl {
+  color: var(--accent);
+  background: none;
+  padding: 0;
+}
+.slide[data-style="tech"][data-ink="light"] .display .hl {
+  text-shadow: 0 0 22px color-mix(in srgb, var(--accent) 55%, transparent);
+}
+
+/* Windows, chat, widgets, notifications */
+.ui-win {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--win);
+  border: 1.5px solid var(--win-line);
+  border-radius: 26px;
+  box-shadow: var(--glow);
+}
+.ui-bar {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 58px;
+  padding: 0 24px;
+  background: var(--win-bar);
+  border-bottom: 1.5px solid var(--win-line);
+  font-family: var(--font-space-mono), monospace;
+  font-size: 21px;
+  color: var(--muted);
+}
+.ui-bar i {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--fg) 22%, transparent);
+}
+.ui-bar i:first-child {
+  background: var(--accent);
+}
+.ui-bar span {
+  margin-left: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ui-body {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+.ui-photo-flow {
+  flex: 1 1 500px;
+  min-height: 340px;
+  max-height: 580px;
+  margin-bottom: 40px;
+}
+.ui-card {
+  padding: 34px 38px;
+  background: var(--win);
+  border: 1.5px solid var(--win-line);
+  border-left: 6px solid var(--accent);
+  border-radius: 22px;
+  box-shadow: var(--glow);
+}
+.slide .ui-chip {
+  display: inline-block;
+  align-self: flex-start;
+  padding: 0.38em 0.85em;
+  border: 1.5px solid var(--accent);
+  border-radius: 999px;
+  color: var(--accent);
+  font-family: var(--font-space-mono), monospace;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: 1.1;
+}
+.slide .ui-chip::before {
+  content: "";
+  display: inline-block;
+  width: 0.55em;
+  height: 0.55em;
+  margin-right: 0.55em;
+  border-radius: 50%;
+  background: var(--accent);
+  vertical-align: 0.05em;
+}
+.slide .ui-mono {
+  font-family: var(--font-space-mono), monospace;
+  letter-spacing: 0.02em;
+}
+.slide .ui-cursor::after {
+  content: "";
+  display: inline-block;
+  width: 0.42em;
+  height: 0.86em;
+  margin-left: 0.14em;
+  vertical-align: -0.06em;
+  background: var(--accent);
+  box-shadow: 0 0 18px color-mix(in srgb, var(--accent) 60%, transparent);
+}
+.ui-person {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+.ui-avatar {
+  position: relative;
+  flex: none;
+  width: 176px;
+  height: 176px;
+  border-radius: 50%;
+  border: 3px solid var(--accent);
+  box-shadow: var(--glow);
+}
+.ui-avatar > .photo,
+.ui-avatar > span {
+  border-radius: 50%;
+  overflow: hidden;
+}
+.ui-avatar > span {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: var(--win-bar);
+  font-size: 64px;
+  font-weight: 700;
+  color: var(--accent);
+}
+.ui-online {
+  position: absolute;
+  right: 6px;
+  bottom: 10px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #3ddc84;
+  border: 5px solid var(--bg);
+}
+.ui-bubble {
+  position: relative;
+  padding: 44px 50px;
+  background: var(--win);
+  border: 1.5px solid var(--win-line);
+  border-radius: 12px 44px 44px 44px;
+  box-shadow: var(--glow);
+}
+.ui-typing {
+  display: flex;
+  gap: 10px;
+  margin: 26px 0 0 34px;
+}
+.ui-typing i {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--muted);
+  opacity: 0.6;
+}
+.ui-typing i:nth-child(2) {
+  opacity: 0.4;
+}
+.ui-typing i:nth-child(3) {
+  opacity: 0.25;
+}
+.ui-caption {
+  margin-top: 26px;
+  font-size: 18px;
+}
+.ui-term .ui-body {
+  padding: 46px 48px 54px;
+}
+.ui-term-line {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 26px;
+}
+.ui-prompt {
+  font-family: var(--font-space-mono), monospace;
+  font-size: 56px;
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--accent);
+}
+.ui-widget {
+  padding: 40px 44px 48px;
+  background: var(--win);
+  border: 1.5px solid var(--win-line);
+  border-radius: 34px;
+  box-shadow: var(--glow);
+}
+.ui-widget-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  color: var(--muted);
+}
+.ui-widget-icon {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 18px;
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+  color: var(--accent);
+}
+.slide[data-style="tech"][data-ink="light"] .ui-glow {
+  text-shadow: 0 0 40px color-mix(in srgb, var(--accent) 50%, transparent);
+}
+.ui-progress {
+  height: 20px;
+  border-radius: 20px;
+  background: color-mix(in srgb, var(--fg) 10%, transparent);
+  overflow: hidden;
+}
+.ui-progress > div {
+  height: 100%;
+  border-radius: 20px;
+  background: var(--accent);
+  box-shadow: 0 0 24px color-mix(in srgb, var(--accent) 60%, transparent);
+}
+.ui-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.ui-toast {
+  display: grid;
+  grid-template-columns: 84px 1fr;
+  gap: 26px;
+  align-items: center;
+  padding: 26px 30px;
+  background: var(--win);
+  border: 1.5px solid var(--win-line);
+  border-radius: 28px;
+  box-shadow: var(--glow);
+}
+.ui-stack .ui-toast:nth-child(2) {
+  margin-left: 26px;
+}
+.ui-stack .ui-toast:nth-child(3) {
+  margin-left: 52px;
+}
+.ui-stack .ui-toast:nth-child(4) {
+  margin-left: 78px;
+}
+.ui-app-icon {
+  display: grid;
+  place-items: center;
+  width: 84px;
+  height: 84px;
+  border-radius: 22px;
+  background: var(--accent);
+  color: var(--accent-fg);
+  font-size: 36px;
+}
+.ui-cta-toast {
+  grid-template-columns: 104px 1fr;
+  padding: 34px 36px;
+}
+.ui-cta-toast .ui-app-icon {
+  width: 104px;
+  height: 104px;
+  border-radius: 28px;
+}
+.ui-summary .ui-body {
+  padding: 34px 40px 40px;
+}
+.slide[data-style="tech"] .ui-pointer {
+  filter: drop-shadow(0 0 12px color-mix(in srgb, var(--accent) 70%, transparent));
+}
+
+/* The formats it does not recompose */
+.slide[data-style="tech"] :is(.list-row, .grid-card, .duo-card, .compare-card, .diagram-node, .qa-bubble, .cta-summary, .note-box) {
+  background: var(--win);
+  color: var(--fg);
+  border: 1.5px solid var(--win-line);
+  border-radius: 26px;
+  box-shadow: var(--glow) !important;
+}
+.slide[data-style="tech"] :is(.compare-card.on-accent, .diagram-node.on-accent) {
+  border-color: var(--accent);
+  border-width: 2.5px;
+}
+.slide[data-style="tech"] .icon-bubble {
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+  color: var(--accent);
+  border-radius: 20px;
+}
+.slide[data-style="tech"] :is(.kicker, .kicker-pill, .slide-source, .slide-page, .slide-handle) {
+  font-family: var(--font-space-mono), monospace;
+}
+.slide[data-style="tech"] .kicker-pill {
+  background: none;
+  color: var(--accent);
+  border: 1.5px solid var(--accent);
+}
+.slide[data-style="tech"] .kicker::before {
+  content: "// ";
+  opacity: 0.6;
+}
+.slide[data-style="tech"] :is(.rounded-photo, .text-photo, .quote-photo) {
+  border: 1.5px solid var(--win-line);
+  border-radius: 26px;
+  box-shadow: var(--glow);
+}
+.slide[data-style="tech"] :is(.step-num, .timeline-dot) {
+  background: var(--bg);
+  color: var(--accent);
+  border: 2px solid var(--accent);
+  border-radius: 16px;
+  box-shadow: none;
+}
+.slide[data-style="tech"] .timeline-dot {
+  border-radius: 50%;
+}
+.slide[data-style="tech"] .timeline::before,
+.slide[data-style="tech"] .steps::before {
+  background: linear-gradient(to bottom, var(--accent), transparent);
+}
+.slide[data-style="tech"] .bar {
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--fg) 12%, transparent);
+}
+.slide[data-style="tech"] .bar-top,
+.slide[data-style="tech"] .stat-bar > div {
+  background: var(--accent);
+}
+.slide[data-style="tech"] .accent-rule {
+  background: linear-gradient(to right, var(--accent), transparent);
+}
+.slide[data-style="tech"] .question-mark {
+  -webkit-text-stroke: 3px var(--accent);
+  color: transparent;
+  opacity: 0.4;
+}
+.slide[data-style="tech"] :is(.compare-vs, .vs-badge) {
+  background: var(--bg);
+  color: var(--accent);
+  border: 2px solid var(--accent);
+  font-family: var(--font-space-mono), monospace;
+}
+.slide[data-style="tech"] .cta-icon {
+  background: none;
+  border: 2px solid var(--accent);
+}
+.slide[data-style="tech"] .slide-page::before {
+  content: "[";
+}
+.slide[data-style="tech"] .slide-page::after {
+  content: "]";
+}

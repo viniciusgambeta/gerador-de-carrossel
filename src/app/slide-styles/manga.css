@@ -1,0 +1,411 @@
+/* ─────────── Mangá (design system "Manga Ink") ─────────── */
+.slide[data-style="manga"] {
+  --font-head: var(--font-space-grotesk);
+  --ink: #171717;
+  --panel: #ffffff;
+}
+.slide[data-style="manga"] .slide-decor {
+  display: none;
+}
+.slide[data-style="manga"] .display {
+  letter-spacing: -0.04em !important;
+}
+/* Screentone in a corner and a diagonal stripe, both away from the reading area */
+.mg-tone {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.mg-tone::before {
+  content: "";
+  position: absolute;
+  top: -120px;
+  right: -120px;
+  width: 560px;
+  height: 560px;
+  background-image: radial-gradient(var(--fg) 28%, transparent 30%);
+  background-size: 14px 14px;
+  -webkit-mask-image: radial-gradient(circle at 70% 30%, black 10%, transparent 62%);
+  mask-image: radial-gradient(circle at 70% 30%, black 10%, transparent 62%);
+  opacity: 0.16;
+}
+/* The diagonal stripe only on some slides, where the corner is free */
+.mg-tone-stripe::after {
+  content: "";
+  position: absolute;
+  left: -60px;
+  bottom: 110px;
+  width: 300px;
+  height: 22px;
+  background: var(--accent);
+  rotate: -32deg;
+}
+
+/* Comic page: panels cut by diagonal gutters */
+.mg-page {
+  position: absolute;
+  filter: drop-shadow(10px 10px 0 var(--fg));
+}
+.mg-cell {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: var(--panel);
+}
+.mg-gutters {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+  /* On the <svg> itself: the image export copies the svg's styles but not its children's */
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 6;
+  stroke-linejoin: miter;
+}
+.mg-speed-cell {
+  background:
+    radial-gradient(ellipse at 50% 55%, #ffffff 0 18%, transparent 46%),
+    repeating-conic-gradient(from 0deg at 50% 55%, var(--ink) 0deg 1.1deg, transparent 1.1deg 5.5deg),
+    #ffffff;
+}
+.mg-yellow-cell {
+  background: var(--accent);
+}
+/* The cell covers the whole page and is clipped to its corner: pin the number there */
+.mg-yellow-cell .mg-chapter {
+  position: absolute;
+  right: 7%;
+  bottom: 4%;
+}
+.mg-chapter {
+  font-family: var(--font-space-grotesk), sans-serif;
+  font-size: 130px;
+  font-weight: 700;
+  font-style: italic;
+  letter-spacing: -0.06em;
+  color: var(--ink);
+  line-height: 1;
+}
+/* Photos are printed in black and white with a screentone */
+.mg-photo img {
+  filter: grayscale(1) contrast(1.32) brightness(1.06);
+}
+.mg-photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgb(0 0 0 / 0.34) 30%, transparent 33%);
+  background-size: 7px 7px;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+.mg-photo .photo-credit {
+  z-index: 1;
+}
+.mg-frame {
+  position: relative;
+  overflow: hidden;
+  background: var(--panel);
+  border: 6px solid var(--ink);
+  box-shadow: 10px 10px 0 var(--fg);
+}
+.mg-frame-flow {
+  flex: 1 1 500px;
+  min-height: 340px;
+  max-height: 580px;
+  margin-bottom: 44px;
+}
+.slide .mg-caption {
+  display: inline-block;
+  padding: 0.35em 0.75em;
+  background: var(--accent);
+  color: var(--ink);
+  border: 4px solid var(--ink);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  line-height: 1.15;
+}
+.mg-box {
+  padding: 36px 42px;
+  background: var(--panel);
+  color: var(--ink);
+  --muted: #515151;
+  border: 5px solid var(--ink);
+  box-shadow: 10px 10px 0 var(--fg);
+}
+/* Balloons are drawn by slides/balloon.tsx (ink variant) */
+.mg-balloon {
+  padding: 62px 88px 68px;
+}
+/* Top right: the balloon's tail comes in from the top left */
+.slide .mg-name {
+  position: absolute;
+  z-index: 2;
+  top: 24px;
+  right: 24px;
+  max-width: 62%;
+  padding: 14px 22px 16px;
+  background: var(--accent);
+  color: var(--ink);
+  border: 4px solid var(--ink);
+}
+.mg-initials {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-space-grotesk), sans-serif;
+  font-size: 220px;
+  font-weight: 700;
+  font-style: italic;
+  letter-spacing: -0.06em;
+  color: var(--ink);
+}
+.mg-impact {
+  position: relative;
+  overflow: hidden;
+  padding: 190px 110px;
+  background: var(--panel);
+  color: var(--ink);
+  border: 6px solid var(--ink);
+  box-shadow: 12px 12px 0 var(--fg);
+}
+/* Speed lines only around the edges: never behind the text */
+.mg-speed {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse closest-side at center, #ffffff 0 80%, transparent 100%),
+    repeating-conic-gradient(from 0deg at 50% 50%, var(--ink) 0deg 1deg, transparent 1deg 5deg);
+}
+.mg-impact-text {
+  position: relative;
+}
+.mg-burst {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  padding: 110px 136px;
+  color: var(--ink);
+}
+.mg-burst svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  filter: drop-shadow(8px 8px 0 var(--fg));
+  fill: var(--accent);
+  stroke: var(--ink);
+  stroke-width: 5;
+  stroke-linejoin: miter;
+}
+.mg-burst .editable {
+  position: relative;
+}
+.mg-meter {
+  width: 100%;
+  height: 34px;
+  background: #ffffff;
+  border: 5px solid var(--ink);
+}
+.mg-meter > div {
+  height: 100%;
+  background: var(--ink);
+}
+.mg-episodes {
+  border-top: 5px solid var(--fg);
+}
+.mg-episode {
+  display: grid;
+  grid-template-columns: 96px 1fr;
+  gap: 28px;
+  align-items: center;
+  padding: 24px 0;
+  border-bottom: 3px solid var(--fg);
+}
+.mg-ep-num {
+  display: grid;
+  place-items: center;
+  width: 92px;
+  height: 92px;
+  background: var(--fg);
+  color: var(--bg);
+  font-family: var(--font-space-grotesk), sans-serif;
+  font-size: 44px;
+  font-weight: 700;
+  font-style: italic;
+  letter-spacing: -0.04em;
+}
+.mg-episode:first-child .mg-ep-num {
+  background: var(--accent);
+  color: var(--ink);
+  border: 4px solid var(--fg);
+}
+.mg-note {
+  padding: 34px 40px 40px;
+  background: var(--panel);
+  color: var(--ink);
+  border: 5px solid var(--ink);
+  box-shadow: 10px 10px 0 var(--fg);
+}
+.mg-note-head {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 18px;
+  padding-bottom: 18px;
+  border-bottom: 3px solid var(--ink);
+  font-size: 22px;
+}
+.mg-note-head b {
+  display: block;
+  font-size: 26px;
+}
+.mg-note-head span {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+  color: #515151;
+}
+.mg-note-avatar :is(img, span) {
+  display: grid;
+  place-items: center;
+  object-fit: cover;
+  border: 4px solid var(--ink);
+  background: var(--accent);
+  font-weight: 800;
+}
+.mg-cta-balloon .balloon-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+.mg-cta-icon {
+  color: var(--ink);
+}
+.slide[data-style="manga"] .cta-pointer {
+  color: var(--fg);
+}
+.slide[data-style="manga"] :is(.slide-source, .slide-page, .slide-handle, .slide-next) {
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.slide[data-style="manga"] .slide-page {
+  padding: 4px 14px;
+  background: var(--fg);
+  color: var(--bg) !important;
+  font-style: italic;
+}
+.slide[data-style="manga"] .slide-handle img {
+  border-radius: 0;
+  border: 3px solid var(--fg);
+}
+
+/* The formats it does not recompose */
+.slide[data-style="manga"] :is(.list-row, .grid-card, .duo-card, .compare-card, .diagram-node, .qa-bubble, .cta-summary, .note-box) {
+  background: var(--panel);
+  color: var(--ink);
+  --muted: #515151;
+  --accent: #171717;
+  border: 5px solid var(--ink);
+  border-radius: 0;
+  box-shadow: 10px 10px 0 var(--fg) !important;
+}
+.slide[data-style="manga"] :is(.compare-card.on-accent, .diagram-node.on-accent) {
+  background: #f6d647;
+}
+.slide[data-style="manga"] .icon-bubble {
+  background: var(--fg);
+  color: var(--bg);
+  border-radius: 0;
+}
+.slide[data-style="manga"] :is(.list-row, .grid-card, .duo-card) .icon-bubble {
+  background: #171717;
+  color: #f6d647;
+}
+.slide[data-style="manga"] :is(.kicker, .kicker-pill) {
+  display: inline-block;
+  align-self: flex-start;
+  padding: 0.35em 0.75em;
+  background: #f6d647;
+  color: #171717;
+  border: 4px solid #171717;
+  border-radius: 0;
+}
+.slide[data-style="manga"] :is(.rounded-photo, .text-photo, .quote-photo, .profile-photo) {
+  border-radius: 0;
+  border: 6px solid #171717;
+  box-shadow: 10px 10px 0 var(--fg);
+}
+.slide[data-style="manga"] .photo img {
+  filter: grayscale(1) contrast(1.3);
+}
+.slide[data-style="manga"] .profile-ring {
+  border-radius: 0;
+  border: none;
+  padding: 0;
+}
+.slide[data-style="manga"] :is(.step-num, .timeline-dot) {
+  background: #f6d647;
+  color: #171717;
+  border: 4px solid #171717;
+  border-radius: 0;
+  box-shadow: none;
+  font-style: italic;
+}
+.slide[data-style="manga"] .timeline::before,
+.slide[data-style="manga"] .steps::before {
+  width: 5px;
+  background: var(--fg);
+}
+.slide[data-style="manga"] :is(.bar, .stat-bar, .stat-bar > div) {
+  border-radius: 0;
+}
+.slide[data-style="manga"] .bar {
+  background: #ffffff;
+  border: 4px solid #171717;
+}
+.slide[data-style="manga"] :is(.bar-top, .stat-bar > div) {
+  background: #f6d647;
+}
+.slide[data-style="manga"] .accent-rule {
+  width: 100%;
+  height: 5px;
+  border-radius: 0;
+  background: var(--fg);
+}
+.slide[data-style="manga"] .question-mark {
+  -webkit-text-stroke: 0;
+  color: #f6d647;
+  font-style: italic;
+  text-shadow: 10px 10px 0 var(--fg);
+  opacity: 1;
+}
+.slide[data-style="manga"] :is(.compare-vs, .vs-badge) {
+  background: #f6d647;
+  color: #171717;
+  border: 5px solid #171717;
+  border-radius: 0;
+  box-shadow: 6px 6px 0 var(--fg);
+  font-style: italic;
+}
+/* Yellow is for fills only: as a text color on paper it disappears */
+.slide[data-style="manga"][data-ink="dark"] [style*="color: var(--accent)"] {
+  color: var(--fg) !important;
+}
+.slide[data-style="manga"] .vs-photo {
+  filter: grayscale(1) contrast(1.3);
+}
+.slide[data-style="manga"] .cta-icon {
+  background: #f6d647;
+  color: #171717;
+  border: 5px solid #171717;
+  box-shadow: 6px 6px 0 var(--fg);
+}

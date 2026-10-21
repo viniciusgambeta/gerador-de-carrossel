@@ -1,0 +1,401 @@
+/* ─────────── Colagem (collage) ─────────── */
+.slide[data-style="collage"] {
+  --font-head: var(--font-archivo-black);
+  --font-ui: var(--font-courier);
+  --paper: #fffcf4;
+  --paper-ink: #1a1814;
+}
+.slide[data-style="collage"] .slide-decor {
+  display: none;
+}
+.slide[data-style="collage"] .display {
+  --ts: 0.86;
+  font-weight: 400 !important;
+  text-transform: uppercase;
+  letter-spacing: -0.01em !important;
+}
+.slide[data-style="collage"] .editable:not(.display) {
+  --ts: 1.04;
+}
+/* Paper grain and a second paper layer in the corner */
+.cl-texture {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(color-mix(in srgb, var(--fg) 7%, transparent) 1px, transparent 1.4px),
+    radial-gradient(color-mix(in srgb, var(--fg) 5%, transparent) 1px, transparent 1.4px);
+  background-size: 7px 7px, 11px 11px;
+  background-position: 0 0, 3px 5px;
+}
+.cl-texture::after {
+  content: "";
+  position: absolute;
+  left: -40px;
+  bottom: -60px;
+  width: 520px;
+  height: 260px;
+  background: color-mix(in srgb, var(--accent) 55%, var(--bg));
+  rotate: 8deg;
+  clip-path: polygon(0 8%, 6% 0, 14% 6%, 22% 1%, 31% 7%, 40% 2%, 50% 8%, 60% 2%, 70% 7%, 80% 1%, 90% 6%, 100% 2%, 100% 100%, 0 100%);
+  opacity: 0.55;
+}
+
+/* Highlights: cut-out labels in a serif italic, mixed into the heavy type */
+.slide[data-style="collage"] .hl {
+  color: var(--accent-fg);
+  background: var(--accent);
+  padding: 0 0.16em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+.slide[data-style="collage"] .display .hl {
+  font-family: var(--font-quote), serif;
+  font-style: italic;
+  font-weight: 400;
+  text-transform: none;
+  font-size: 1.16em;
+  letter-spacing: 0;
+}
+
+/* Pieces */
+.cl-tape {
+  position: absolute;
+  z-index: 3;
+  width: 170px;
+  height: 48px;
+  background: rgb(247 240 214 / 0.78);
+  box-shadow: 0 2px 5px rgb(0 0 0 / 0.15);
+  pointer-events: none;
+}
+.cl-frame {
+  position: absolute;
+  filter: drop-shadow(0 12px 14px rgb(0 0 0 / 0.32));
+}
+.cl-frame-flow {
+  position: relative;
+  flex: 1 1 480px;
+  min-height: 320px;
+  max-height: 560px;
+  margin-bottom: 44px;
+}
+.cl-torn {
+  position: absolute;
+  inset: 0;
+  padding: 16px;
+  background: var(--paper);
+}
+.cl-photo {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.cl-bw .photo img {
+  filter: grayscale(1) contrast(1.35);
+}
+.slide .cl-label {
+  display: inline-block;
+  align-self: flex-start;
+  padding: 0.32em 0.7em;
+  background: var(--fg);
+  color: var(--bg);
+  font-family: var(--font-courier), monospace;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  line-height: 1.15;
+  rotate: -1.5deg;
+  box-shadow: 3px 3px 0 rgb(0 0 0 / 0.25);
+}
+.slide .cl-label-accent {
+  background: var(--accent);
+  color: var(--accent-fg);
+  rotate: 1.5deg;
+}
+.slide .cl-paper {
+  background: var(--paper);
+  color: var(--paper-ink);
+  padding: 26px 32px;
+  rotate: -0.6deg;
+  box-shadow: 0 8px 16px -10px rgb(0 0 0 / 0.45);
+}
+.slide .cl-paper .hl {
+  color: var(--paper-ink);
+}
+.cl-halftone {
+  position: absolute;
+  pointer-events: none;
+  background-image: radial-gradient(var(--accent) 34%, transparent 36%);
+  background-size: 22px 22px;
+  -webkit-mask-image: radial-gradient(circle, black 30%, transparent 70%);
+  mask-image: radial-gradient(circle, black 30%, transparent 70%);
+}
+.cl-halftone-round {
+  border-radius: 50%;
+  -webkit-mask-image: radial-gradient(circle, black 55%, transparent 71%);
+  mask-image: radial-gradient(circle, black 55%, transparent 71%);
+}
+.cl-burst {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  padding: 96px 120px;
+  color: var(--accent-fg);
+  rotate: -6deg;
+}
+.cl-burst svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  /* On the <svg> itself: the image export copies the svg's styles but not its children's */
+  fill: var(--accent);
+  filter: drop-shadow(6px 6px 0 var(--fg));
+}
+.cl-burst-body {
+  position: relative;
+}
+.cl-burst-small {
+  padding: 50px 60px;
+  rotate: 10deg;
+}
+.cl-burst-icon {
+  padding: 56px 64px;
+}
+.cl-quote-mark {
+  position: absolute;
+  font-family: var(--font-archivo-black), sans-serif;
+  font-size: 400px;
+  line-height: 1;
+  color: var(--accent);
+  pointer-events: none;
+  text-shadow: 8px 8px 0 var(--fg);
+}
+.slide .cl-quote {
+  display: inline;
+  font-family: var(--font-quote), serif;
+  font-style: italic;
+  line-height: 1.55;
+  padding: 0.04em 0.28em;
+  background: var(--paper);
+  color: var(--paper-ink);
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+.slide .cl-quote .hl {
+  background: var(--accent);
+  color: var(--accent-fg);
+}
+.cl-sheet-wrap {
+  filter: drop-shadow(0 14px 16px rgb(0 0 0 / 0.3));
+  rotate: -1deg;
+}
+.cl-sheet {
+  padding: 90px 74px;
+  background: var(--paper);
+  color: var(--paper-ink);
+}
+.cl-meter {
+  width: 100%;
+  height: 34px;
+  background: var(--paper);
+  border: 3px solid var(--fg);
+}
+.cl-meter > div {
+  height: 100%;
+  background: repeating-linear-gradient(-45deg, var(--accent) 0 12px, color-mix(in srgb, var(--accent) 70%, var(--fg)) 12px 16px);
+}
+.cl-strips {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  filter: drop-shadow(0 8px 10px rgb(0 0 0 / 0.28));
+}
+.cl-strip-row {
+  display: grid;
+  grid-template-columns: 76px 1fr;
+  gap: 18px;
+  align-items: center;
+  padding: 26px 40px 26px 30px;
+  background: var(--paper);
+  color: var(--paper-ink);
+}
+.cl-num {
+  display: grid;
+  place-items: center;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--accent-fg);
+  font-family: var(--font-archivo-black), sans-serif;
+  font-size: 34px;
+}
+.cl-index-card {
+  position: relative;
+  padding: 50px 50px 54px 86px;
+  background:
+    linear-gradient(to right, transparent 60px, rgb(229 72 77 / 0.45) 60px 63px, transparent 63px),
+    repeating-linear-gradient(to bottom, var(--paper) 0 46px, rgb(90 140 200 / 0.3) 46px 48px);
+  color: var(--paper-ink);
+  rotate: 0.8deg;
+  box-shadow: 0 14px 22px -14px rgb(0 0 0 / 0.5);
+}
+.slide .cl-index-card .hl {
+  color: var(--accent-fg);
+}
+.slide[data-style="collage"] .cl-pointer {
+  color: var(--accent);
+  filter: drop-shadow(4px 4px 0 var(--fg));
+}
+
+/* The formats it does not recompose */
+.slide[data-style="collage"] :is(.list-row, .grid-card, .duo-card, .compare-card, .diagram-node, .qa-bubble, .cta-summary, .note-box) {
+  position: relative;
+  background: var(--paper);
+  color: var(--paper-ink);
+  --muted: rgb(26 24 20 / 0.7);
+  border: none;
+  border-radius: 0;
+  box-shadow: 0 10px 16px -10px rgb(0 0 0 / 0.45) !important;
+}
+.slide[data-style="collage"] :is(.grid-card, .duo-card, .compare-card):nth-child(odd) {
+  rotate: -1deg;
+}
+.slide[data-style="collage"] :is(.grid-card, .duo-card, .compare-card):nth-child(even) {
+  rotate: 1.2deg;
+}
+.slide[data-style="collage"] :is(.grid-card, .duo-card, .compare-card)::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  width: 120px;
+  height: 38px;
+  translate: -50% 0;
+  rotate: -3deg;
+  background: rgb(247 240 214 / 0.78);
+  box-shadow: 0 2px 5px rgb(0 0 0 / 0.15);
+}
+.slide[data-style="collage"] :is(.compare-card.on-accent, .diagram-node.on-accent) {
+  background: var(--accent);
+  color: var(--accent-fg);
+}
+.slide[data-style="collage"] .icon-bubble {
+  background: var(--accent);
+  color: var(--accent-fg);
+  border-radius: 50%;
+  box-shadow: 3px 3px 0 var(--paper-ink);
+}
+.slide[data-style="collage"] .kicker-pill,
+.slide[data-style="collage"] .kicker {
+  display: inline-block;
+  align-self: flex-start;
+  padding: 0.3em 0.7em;
+  background: var(--fg);
+  color: var(--bg);
+  border-radius: 0;
+  font-family: var(--font-courier), monospace;
+  letter-spacing: 0.14em;
+  rotate: -1.5deg;
+}
+.slide[data-style="collage"] :is(.rounded-photo, .text-photo, .quote-photo, .profile-photo) {
+  border-radius: 0;
+  border: 14px solid var(--paper);
+  box-shadow: 0 12px 18px -10px rgb(0 0 0 / 0.45);
+}
+.slide[data-style="collage"] .text-photo {
+  rotate: -1.2deg;
+}
+.slide[data-style="collage"] .profile-ring {
+  border-radius: 0;
+  border: none;
+  padding: 0;
+  rotate: 2deg;
+}
+.slide[data-style="collage"] :is(.step-num, .timeline-dot) {
+  background: var(--accent);
+  color: var(--accent-fg);
+  border-radius: 50%;
+  box-shadow: 3px 3px 0 var(--fg);
+  font-family: var(--font-archivo-black), sans-serif;
+}
+.slide[data-style="collage"] .timeline::before,
+.slide[data-style="collage"] .steps::before {
+  background: none;
+  border-left: 4px dashed var(--fg);
+}
+.slide[data-style="collage"] .bar {
+  border-radius: 0;
+  background: var(--paper);
+  border: 3px solid var(--fg);
+}
+.slide[data-style="collage"] .bar-top,
+.slide[data-style="collage"] .stat-bar > div {
+  background: var(--accent);
+}
+.slide[data-style="collage"] .accent-rule {
+  width: 180px;
+  height: 14px;
+  border-radius: 0;
+  background: var(--accent);
+  rotate: -2deg;
+}
+.slide[data-style="collage"] .question-mark {
+  font-family: var(--font-archivo-black), sans-serif;
+  -webkit-text-stroke: 0;
+  color: var(--accent);
+  opacity: 0.3;
+  rotate: 8deg;
+}
+/* The accent is a fill here: as a text color it would vanish on paper and on light slides */
+.slide[data-style="collage"][data-ink="dark"] [style*="color: var(--accent)"],
+.slide[data-style="collage"] :is(.list-row, .grid-card, .duo-card, .compare-card, .diagram-node, .qa-bubble, .note-box) [style*="color: var(--accent)"] {
+  color: var(--paper-ink) !important;
+  text-shadow: 4px 4px 0 var(--accent);
+}
+.slide[data-style="collage"] :is(.compare-vs, .vs-badge) {
+  background: var(--accent);
+  color: var(--accent-fg);
+  border-radius: 50%;
+  box-shadow: 6px 6px 0 var(--fg);
+  font-family: var(--font-archivo-black), sans-serif;
+  rotate: -8deg;
+}
+.slide[data-style="collage"] .cta-icon {
+  background: var(--accent);
+  color: var(--accent-fg);
+  box-shadow: 6px 6px 0 var(--fg);
+}
+.slide[data-style="collage"] .slide-page {
+  padding: 4px 14px;
+  background: var(--fg);
+  color: var(--bg) !important;
+  font-family: var(--font-courier), monospace;
+  font-weight: 700;
+  rotate: 2deg;
+}
+.slide[data-style="collage"] :is(.slide-source, .slide-handle, .slide-next) {
+  font-family: var(--font-courier), monospace;
+  font-weight: 700;
+}
+
+/* Cover headline: each line cut out on its own paper strip, stuck over the photo's edge */
+.slide .cl-title-strips {
+  display: inline;
+  padding: 0.02em 0.22em 0.06em;
+  background: var(--paper);
+  color: var(--paper-ink);
+  line-height: 1.22;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  box-shadow: 4px 5px 0 rgb(0 0 0 / 0.28);
+}
+.slide[data-style="collage"][data-layout="cover"] .slide-top {
+  color: #ffffff;
+  text-shadow: 0 1px 8px rgb(0 0 0 / 0.6);
+}
+.slide[data-style="collage"][data-layout="cover"] .slide-source {
+  color: #ffffff;
+}

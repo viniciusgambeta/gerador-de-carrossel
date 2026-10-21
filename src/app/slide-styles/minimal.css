@@ -1,0 +1,256 @@
+/* ─────────── Minimalista ─────────── */
+.slide[data-style="minimal"] {
+  --font-head: var(--font-manrope);
+  --font-ui: var(--font-manrope);
+  --font-quote: var(--font-manrope);
+}
+.slide[data-style="minimal"] .slide-decor {
+  display: none;
+}
+.slide[data-style="minimal"] .display {
+  font-weight: 300 !important;
+  letter-spacing: -0.03em !important;
+}
+.slide[data-style="minimal"] .min-thin {
+  font-weight: 200 !important;
+}
+.slide[data-style="minimal"] .hl {
+  color: var(--accent);
+  background: none;
+  padding: 0;
+  font-weight: 600;
+}
+.slide[data-style="minimal"] .display .hl {
+  font-weight: 600;
+}
+
+/* Chrome: wider margins, smaller and lighter */
+.slide[data-style="minimal"] :is(.slide-top, .slide-footer) {
+  left: 120px;
+  right: 120px;
+}
+.slide[data-style="minimal"] :is(.slide-source, .slide-page, .slide-handle, .slide-next) {
+  font-size: 21px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+.slide[data-style="minimal"] .slide-source img {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  filter: grayscale(1);
+}
+.slide[data-style="minimal"] .slide-handle img {
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
+}
+
+/* Pieces */
+.slide .min-label {
+  color: var(--fg);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  line-height: 1.4;
+}
+.slide .min-label::before {
+  content: "";
+  display: inline-block;
+  width: 0.5em;
+  height: 0.5em;
+  margin-right: 0.9em;
+  border-radius: 50%;
+  background: var(--accent);
+  vertical-align: 0.1em;
+}
+.slide .min-label-plain::before {
+  display: none;
+}
+.min-rule {
+  width: 72px;
+  height: 2px;
+  background: var(--fg);
+  flex: none;
+}
+.min-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex: none;
+}
+.min-photo {
+  position: relative;
+}
+.min-caption {
+  font-size: 17px;
+  letter-spacing: 0.04em;
+}
+.min-quote-mark {
+  font-family: var(--font-manrope), sans-serif;
+  font-size: 120px;
+  font-weight: 300;
+  line-height: 0.6;
+  height: 56px;
+  color: var(--accent);
+}
+.min-bar {
+  position: relative;
+  height: 2px;
+  background: var(--line);
+}
+.min-bar > div {
+  position: absolute;
+  left: 0;
+  top: -2px;
+  height: 6px;
+  background: var(--accent);
+}
+.min-duo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.min-duo > div {
+  padding-right: 40px;
+}
+.min-duo > div + div {
+  padding: 0 0 0 48px;
+  border-left: 1px solid var(--line);
+}
+.min-list .min-row {
+  display: grid;
+  grid-template-columns: 96px 1fr;
+  align-items: baseline;
+  padding: 30px 0;
+  border-top: 1px solid var(--line);
+}
+.min-list .min-row:last-child {
+  border-bottom: 1px solid var(--line);
+}
+.min-index {
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+.min-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-top: 1px solid var(--line);
+}
+.min-cell {
+  padding: 40px 40px 44px 0;
+  border-bottom: 1px solid var(--line);
+  color: var(--fg);
+}
+.min-cell:nth-child(even) {
+  padding-left: 40px;
+  padding-right: 0;
+  border-left: 1px solid var(--line);
+}
+.min-cell > svg {
+  color: var(--accent);
+}
+.min-cta-icon {
+  display: inline-grid;
+  place-items: center;
+  width: 104px;
+  height: 104px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  color: var(--accent);
+}
+.slide[data-style="minimal"] .cta-pointer {
+  color: var(--fg);
+}
+.slide[data-style="minimal"] .cta-signoff {
+  font-size: 21px;
+  font-weight: 500;
+}
+
+/* The formats it does not recompose */
+.slide[data-style="minimal"] :is(.list-row, .grid-card, .duo-card, .compare-card, .diagram-node, .qa-bubble, .cta-summary, .note-box) {
+  background: transparent;
+  color: var(--fg);
+  border: none;
+  border-top: 1px solid var(--line);
+  border-radius: 0;
+  box-shadow: none !important;
+  padding-left: 0;
+  padding-right: 0;
+}
+.slide[data-style="minimal"] :is(.compare-card.on-accent, .diagram-node.on-accent) {
+  border-top: 2px solid var(--accent);
+}
+.slide[data-style="minimal"] .icon-bubble {
+  background: none;
+  color: var(--accent);
+  border: 1px solid var(--line);
+}
+.slide[data-style="minimal"] .icon-bubble svg {
+  stroke-width: 1.4;
+}
+.slide[data-style="minimal"] :is(.kicker, .kicker-pill) {
+  background: none;
+  color: var(--fg);
+  padding: 0;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+}
+.slide[data-style="minimal"] :is(.rounded-photo, .text-photo, .quote-photo, .profile-photo, .profile-ring) {
+  border-radius: 0;
+}
+.slide[data-style="minimal"] .profile-ring {
+  border: none;
+  padding: 0;
+}
+.slide[data-style="minimal"] :is(.step-num, .timeline-dot) {
+  background: var(--bg);
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  box-shadow: none;
+  font-weight: 400;
+}
+.slide[data-style="minimal"] .timeline::before,
+.slide[data-style="minimal"] .steps::before {
+  width: 1px;
+}
+.slide[data-style="minimal"] :is(.bar, .stat-bar, .stat-bar > div) {
+  border-radius: 0;
+}
+.slide[data-style="minimal"] .bar {
+  height: 10px;
+  background: var(--line);
+}
+.slide[data-style="minimal"] .bar-top {
+  background: var(--accent);
+}
+.slide[data-style="minimal"] .accent-rule {
+  width: 72px;
+  height: 2px;
+  border-radius: 0;
+  background: var(--fg);
+}
+.slide[data-style="minimal"] .question-mark {
+  -webkit-text-stroke: 1px var(--accent);
+  color: transparent;
+  font-weight: 200;
+  opacity: 0.5;
+}
+.slide[data-style="minimal"] :is(.compare-vs, .vs-badge) {
+  background: var(--bg);
+  color: var(--fg);
+  border: 1px solid var(--fg);
+  box-shadow: none;
+  font-weight: 400;
+}
+.slide[data-style="minimal"] .vs-slash {
+  color: var(--bg);
+}
+.slide[data-style="minimal"] .cta-icon {
+  background: none;
+  border: 1px solid var(--line);
+  color: var(--accent);
+}

@@ -1,0 +1,356 @@
+/* ─────────── Jornal (newspaper) ─────────── */
+.slide[data-style="newspaper"] {
+  --font-head: var(--font-playfair);
+  --font-ui: var(--font-source-serif);
+  --font-quote: var(--font-playfair);
+}
+.slide[data-style="newspaper"] .display {
+  --ts: 0.95;
+  letter-spacing: -0.012em !important;
+}
+.slide[data-style="newspaper"] .slide-decor {
+  background-image: radial-gradient(color-mix(in srgb, var(--fg) 6%, transparent) 1px, transparent 1.6px);
+  background-size: 5px 5px;
+}
+.slide[data-style="newspaper"] .slide-top {
+  top: 42px;
+  left: 72px;
+  right: 72px;
+  height: auto;
+  padding-bottom: 16px;
+  border-bottom: 5px double var(--fg);
+  color: var(--fg);
+  text-shadow: none !important;
+}
+.slide[data-style="newspaper"] .slide-source {
+  font-family: var(--font-playfair), serif;
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--fg) !important;
+}
+.slide[data-style="newspaper"] .slide-source img {
+  filter: grayscale(1);
+}
+.slide[data-style="newspaper"] .slide-page {
+  font-style: italic;
+  color: var(--muted) !important;
+}
+.slide[data-style="newspaper"] .slide-footer {
+  left: 72px;
+  right: 72px;
+  bottom: 40px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+  color: var(--muted) !important;
+  text-shadow: none !important;
+}
+.slide[data-style="newspaper"] .hl {
+  color: inherit;
+  background: none;
+  padding: 0;
+  font-style: italic;
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 0.07em;
+  text-underline-offset: 0.14em;
+}
+.slide[data-style="newspaper"] .kicker {
+  display: inline-block;
+  padding-top: 10px;
+  border-top: 4px solid var(--accent);
+  letter-spacing: 0.16em;
+  font-variant: small-caps;
+}
+.slide[data-style="newspaper"] .kicker-pill {
+  background: none;
+  color: var(--fg);
+  border-radius: 0;
+  padding: 0.25em 0;
+  border-top: 2px solid var(--fg);
+  border-bottom: 2px solid var(--fg);
+  letter-spacing: 0.22em;
+}
+.slide[data-style="newspaper"] :is(.list-row, .grid-card, .duo-card, .compare-card, .diagram-node, .qa-bubble, .cta-summary, .note-box) {
+  background: transparent;
+  color: var(--fg);
+  border: none;
+  border-top: 2px solid var(--fg);
+  border-radius: 0;
+  box-shadow: none !important;
+  padding-left: 0;
+  padding-right: 0;
+}
+.slide[data-style="newspaper"] .compare-card.on-accent {
+  border-top-color: var(--accent);
+}
+.slide[data-style="newspaper"] .diagram-node.on-accent {
+  border-top: 4px solid var(--accent);
+}
+.slide[data-style="newspaper"] .icon-bubble {
+  background: none;
+  color: var(--fg);
+  border: 2px solid var(--fg);
+  border-radius: 0;
+}
+.slide[data-style="newspaper"] .photo {
+  filter: grayscale(1) contrast(1.08);
+}
+.slide[data-style="newspaper"] :is(.rounded-photo, .text-photo, .quote-photo, .profile-photo) {
+  border-radius: 0;
+}
+.slide[data-style="newspaper"] .profile-ring {
+  border-radius: 0;
+  border: 2px solid var(--fg);
+}
+.slide[data-style="newspaper"] .photo-credit {
+  font-style: italic;
+}
+/* Front page: the photo sits in a frame, the headline below it */
+.slide[data-style="newspaper"] .photo-shade {
+  display: none;
+}
+.slide[data-style="newspaper"][data-layout="image"] .photo.inset-0 {
+  top: 134px;
+  left: 72px;
+  right: 72px;
+  bottom: 420px;
+}
+.slide[data-style="newspaper"][data-layout="image"] .fitbox {
+  top: 960px !important;
+  left: 72px;
+  right: 72px;
+  justify-content: flex-start !important;
+}
+.slide[data-style="newspaper"].has-photo-bg :is(.slide-top, .slide-footer, .slide-source, .slide-page) {
+  color: var(--fg);
+  text-shadow: none;
+}
+.slide[data-style="newspaper"] .vs-photo {
+  filter: grayscale(1) contrast(1.1);
+}
+.slide[data-style="newspaper"] .vs-stage {
+  top: 120px;
+  height: 580px !important;
+}
+.slide[data-style="newspaper"] :is(.compare-vs, .vs-badge) {
+  background: var(--bg);
+  color: var(--fg);
+  border: 2px solid var(--fg);
+  font-family: var(--font-playfair), serif;
+  font-style: italic;
+  font-weight: 700;
+  text-transform: lowercase;
+}
+.slide[data-style="newspaper"] .question-mark {
+  font-family: var(--font-playfair), serif;
+  font-style: italic;
+  -webkit-text-stroke: 0;
+  color: var(--fg);
+  opacity: 0.07;
+}
+.slide[data-style="newspaper"] .step-num,
+.slide[data-style="newspaper"] .timeline-dot {
+  background: var(--bg);
+  color: var(--fg);
+  border: 2px solid var(--fg);
+  border-radius: 0;
+  font-family: var(--font-playfair), serif;
+}
+.slide[data-style="newspaper"] .timeline-dot {
+  background: var(--fg);
+}
+.slide[data-style="newspaper"] :is(.bar, .stat-bar, .stat-bar > div) {
+  border-radius: 0;
+}
+.slide[data-style="newspaper"] .bar {
+  background: var(--fg);
+  opacity: 0.85;
+}
+.slide[data-style="newspaper"] .bar-top {
+  background: var(--accent);
+  opacity: 1;
+}
+.slide[data-style="newspaper"] .accent-rule {
+  width: 100%;
+  height: 0;
+  background: none;
+  border-top: 5px double var(--fg);
+}
+.slide[data-style="newspaper"] .cta-icon {
+  background: none;
+  color: var(--fg);
+  border: 2px solid var(--fg);
+  border-radius: 0;
+}
+
+
+/* Compositions: front page, columns, drop caps, pull quotes */
+.slide .np-kicker {
+  display: inline-block;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  font-variant: small-caps;
+  text-transform: lowercase;
+  color: var(--fg);
+  padding-top: 10px;
+  border-top: 4px solid var(--accent);
+  line-height: 1.2;
+}
+.np-rule {
+  height: 0;
+  border-top: 5px double var(--fg);
+  flex: none;
+}
+.np-rule-thin {
+  border-top: 1.5px solid var(--fg);
+}
+.np-double {
+  height: 12px;
+  border-top: 6px solid var(--fg);
+  border-bottom: 1.5px solid var(--fg);
+  flex: none;
+}
+.np-front {
+  flex: 1 1 auto;
+  min-height: 380px;
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 36px;
+}
+.np-figure {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  margin: 0;
+}
+.np-photo {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+.np-caption {
+  flex: none;
+  margin-top: 10px;
+  font-style: italic;
+  font-size: 18px;
+}
+.np-figure-wide {
+  flex: 1 1 460px;
+  min-height: 300px;
+  max-height: 560px;
+  margin-bottom: 34px;
+}
+.np-column {
+  padding-left: 34px;
+  border-left: 1.5px solid var(--line);
+}
+.slide .np-dropcap::first-letter {
+  float: left;
+  font-family: var(--font-playfair), serif;
+  font-size: 3.3em;
+  font-weight: 900;
+  line-height: 0.82;
+  padding: 0.06em 0.1em 0 0;
+  color: var(--fg);
+}
+.slide .np-columns {
+  column-count: 2;
+  column-gap: 44px;
+  column-rule: 1.5px solid var(--line);
+}
+.np-pull {
+  padding: 46px 0 50px;
+  border-top: 10px solid var(--fg);
+  border-bottom: 2px solid var(--fg);
+}
+.np-pull-grid {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 44px;
+  align-items: start;
+}
+.np-pull-mark {
+  font-family: var(--font-playfair), serif;
+  font-size: 220px;
+  font-weight: 900;
+  line-height: 0.72;
+  height: 110px;
+  color: var(--accent);
+}
+.np-portrait .np-photo {
+  flex: none;
+  height: 440px;
+}
+.slide .np-byline {
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  font-variant: small-caps;
+  text-transform: lowercase;
+}
+.np-dinkus {
+  font-family: var(--font-playfair), serif;
+  font-size: 40px;
+  letter-spacing: 0.5em;
+  color: var(--accent);
+}
+.np-box {
+  padding: 50px 56px 56px;
+  border: 2px solid var(--fg);
+  outline: 2px solid var(--fg);
+  outline-offset: 8px;
+}
+.np-item {
+  display: grid;
+  grid-template-columns: 84px 1fr;
+  align-items: baseline;
+  padding: 26px 0;
+  border-bottom: 1.5px solid var(--line);
+}
+.np-num {
+  font-family: var(--font-playfair), serif;
+  font-size: 64px;
+  font-style: italic;
+  font-weight: 700;
+  line-height: 0.9;
+  color: var(--accent);
+}
+.np-summary {
+  padding: 34px 0 40px;
+  border-top: 8px solid var(--fg);
+  border-bottom: 1.5px solid var(--fg);
+}
+.np-icon {
+  display: inline-grid;
+  place-items: center;
+  width: 104px;
+  height: 104px;
+  border: 2px solid var(--fg);
+  color: var(--fg);
+}
+/* Front page cover */
+.slide .np-flag {
+  display: inline-block;
+  padding: 0.3em 0.9em;
+  background: var(--fg);
+  color: var(--bg);
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  font-variant: small-caps;
+  text-transform: lowercase;
+  line-height: 1.2;
+}
+.np-deck {
+  align-self: stretch;
+  margin: 28px 0 30px;
+  padding: 20px 36px;
+  border-top: 1.5px solid var(--fg);
+  border-bottom: 1.5px solid var(--fg);
+}
+.np-figure-front {
+  align-self: stretch;
+  flex: 1 1 auto;
+  min-height: 360px;
+  text-align: left;
+}

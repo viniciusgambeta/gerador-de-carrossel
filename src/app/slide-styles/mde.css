@@ -1,0 +1,470 @@
+/* ─────────── MDE (design system "Me dá um Exemplo") ─────────── */
+.slide[data-style="mde"] {
+  --font-head: var(--font-ui);
+  --mde-border: rgb(255 255 255 / 0.1);
+  --mde-hover: rgb(255 255 255 / 0.05);
+}
+.slide[data-style="mde"] .slide-decor {
+  display: none;
+}
+.slide[data-style="mde"] .display {
+  letter-spacing: -0.035em !important;
+}
+.slide[data-style="mde"] .mde-condensed {
+  --ts: 1.12;
+  font-family: var(--font-barlow-condensed), var(--font-ui), sans-serif;
+  font-weight: 800 !important;
+  text-transform: uppercase;
+  letter-spacing: -0.005em !important;
+}
+.slide[data-style="mde"] .hl {
+  color: var(--accent);
+  background: none;
+  padding: 0;
+}
+.slide[data-style="mde"][data-tone="brand"] .hl {
+  color: #ff967b;
+  background: #20191e;
+  padding: 0 0.14em;
+}
+/* Promo backdrop: deep purple gradient with a coral glow */
+.mde-glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 88% 8%, rgb(255 117 81 / 0.2), transparent 42%),
+    radial-gradient(circle at 0% 100%, rgb(124 92 255 / 0.16), transparent 48%),
+    linear-gradient(to bottom, transparent, rgb(0 0 0 / 0.18));
+}
+.slide[data-style="mde"][data-tone="brand"] .mde-glow {
+  background: radial-gradient(circle at 90% 0%, rgb(255 255 255 / 0.22), transparent 46%);
+}
+
+.slide .mde-tag-slot {
+  position: absolute;
+  z-index: 2;
+  top: 26px;
+  right: 26px;
+  max-width: 70%;
+}
+.slide .mde-tag-page {
+  top: 150px;
+  right: 72px;
+}
+.slide .mde-tag {
+  display: inline-block;
+  padding: 0.32em 0.75em;
+  border-radius: 8px;
+  background: var(--accent);
+  color: var(--accent-fg);
+  font-weight: 600;
+  line-height: 1.3;
+}
+.mde-tag-inline {
+  flex: none;
+}
+.mde-progress {
+  height: 10px;
+  border-radius: 10px;
+  background: rgb(255 255 255 / 0.14);
+  overflow: hidden;
+  flex: none;
+}
+.mde-progress > div {
+  width: 38%;
+  height: 100%;
+  border-radius: 10px;
+  background: var(--accent);
+}
+.mde-progress-real {
+  height: 16px;
+}
+.mde-quote-mark {
+  font-family: var(--font-barlow-condensed), sans-serif;
+  font-size: 220px;
+  font-weight: 800;
+  line-height: 0.7;
+  height: 100px;
+  color: var(--accent);
+}
+.mde-card {
+  padding: 44px 46px 50px;
+  background: var(--surface);
+  border: 1.5px solid var(--mde-border);
+  border-radius: 32px;
+}
+.mde-tile {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: 96px;
+  height: 96px;
+  border-radius: 24px;
+  background: var(--mde-hover);
+  border: 1.5px solid var(--mde-border);
+  color: var(--accent);
+  font-size: 36px;
+}
+.mde-tile-accent {
+  width: 124px;
+  height: 124px;
+  border-radius: 30px;
+  background: var(--accent);
+  border: none;
+  color: var(--accent-fg);
+}
+/* Lists and flows: narrower cards, each with its emoji on a soft tile */
+.mde-rows,
+.mde-flow {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  max-width: 820px;
+}
+.mde-row,
+.mde-node {
+  position: relative;
+  display: grid;
+  grid-template-columns: 88px 1fr;
+  gap: 26px;
+  align-items: center;
+  padding: 22px 34px 22px 22px;
+  background: var(--surface);
+  border: 1.5px solid var(--mde-border);
+  border-radius: 28px;
+}
+.mde-row-emoji {
+  display: grid;
+  place-items: center;
+  width: 88px;
+  height: 88px;
+  border-radius: 22px;
+  background: var(--mde-hover);
+  font-size: 46px;
+  line-height: 1;
+  color: var(--accent);
+  font-family: var(--font-barlow-condensed), sans-serif;
+  font-weight: 800;
+}
+.mde-flow {
+  gap: 34px;
+}
+/* A coral stem from one step to the next */
+.mde-node + .mde-node::before {
+  content: "";
+  position: absolute;
+  left: 64px;
+  top: -36px;
+  width: 4px;
+  height: 34px;
+  border-radius: 4px;
+  background: var(--accent);
+}
+.mde-node-hot {
+  background: var(--accent);
+  border-color: transparent;
+  color: var(--accent-fg);
+}
+.mde-node-hot .mde-row-emoji {
+  background: rgb(0 0 0 / 0.14);
+}
+.slide[data-style="mde"] :is(.mde-node-hot, .mde-side-hot, .mde-example) .hl {
+  color: inherit;
+  background: rgb(0 0 0 / 0.16);
+  padding: 0 0.14em;
+}
+.slide .mde-label {
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--muted);
+}
+.slide[data-style="mde"] :is(.slide-source, .slide-page, .slide-handle, .slide-next) {
+  font-weight: 500;
+}
+.slide[data-style="mde"] .slide-handle img {
+  border-radius: 10px;
+}
+
+/* The formats it does not recompose */
+.slide[data-style="mde"] :is(.list-row, .grid-card, .duo-card, .compare-card, .diagram-node, .qa-bubble, .cta-summary, .note-box) {
+  background: var(--surface);
+  color: var(--fg);
+  border: 1.5px solid var(--mde-border);
+  border-radius: 28px;
+  box-shadow: none !important;
+}
+.slide[data-style="mde"] :is(.compare-card.on-accent, .diagram-node.on-accent) {
+  background: var(--accent);
+  color: var(--accent-fg);
+  border-color: transparent;
+}
+.slide[data-style="mde"] .icon-bubble {
+  background: var(--mde-hover);
+  color: var(--accent);
+  border: 1.5px solid var(--mde-border);
+  border-radius: 22px;
+}
+.slide[data-style="mde"] .kicker-pill {
+  background: var(--accent);
+  color: var(--accent-fg);
+  border-radius: 8px;
+  text-transform: none;
+  letter-spacing: 0;
+  font-weight: 600;
+}
+.slide[data-style="mde"] .kicker {
+  color: var(--accent);
+  text-transform: none;
+  letter-spacing: 0;
+  font-weight: 600;
+}
+.slide[data-style="mde"] :is(.rounded-photo, .text-photo) {
+  border-radius: 28px;
+}
+.slide[data-style="mde"] .profile-ring {
+  border-radius: 32px;
+}
+.slide[data-style="mde"] :is(.profile-photo, .quote-photo) {
+  border-radius: 24px;
+}
+.slide[data-style="mde"] :is(.step-num, .timeline-dot) {
+  background: var(--accent);
+  color: var(--accent-fg);
+  border-radius: 20px;
+  box-shadow: none;
+}
+.slide[data-style="mde"] .timeline-dot {
+  border-radius: 50%;
+}
+.slide[data-style="mde"] .bar {
+  border-radius: 12px;
+  background: rgb(255 255 255 / 0.12);
+}
+.slide[data-style="mde"] :is(.bar-top, .stat-bar > div) {
+  background: var(--accent);
+}
+.slide[data-style="mde"] .question-mark {
+  font-family: var(--font-barlow-condensed), sans-serif;
+  -webkit-text-stroke: 0;
+  color: var(--accent);
+  opacity: 0.16;
+}
+.slide[data-style="mde"] :is(.compare-vs, .vs-badge) {
+  background: var(--accent);
+  color: var(--accent-fg);
+  font-family: var(--font-barlow-condensed), sans-serif;
+}
+.slide[data-style="mde"] .cta-icon {
+  background: var(--accent);
+  color: var(--accent-fg);
+  border-radius: 30px;
+}
+
+/* Cover: full-bleed photo under the catalog's deep purple, with a coral glow */
+.mde-hero-shade {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(to top, var(--bg) 0%, color-mix(in srgb, var(--bg) 94%, transparent) 30%, color-mix(in srgb, var(--bg) 62%, transparent) 50%, transparent 72%),
+    linear-gradient(to bottom, rgb(0 0 0 / 0.5), transparent 18%),
+    radial-gradient(circle at 92% 72%, rgb(255 117 81 / 0.28), transparent 42%);
+}
+/* Text with photo: the photo takes the top, the title sits on its fade */
+.mde-top-photo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 840px;
+  overflow: hidden;
+}
+.mde-top-shade {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(to top, var(--bg) 0%, color-mix(in srgb, var(--bg) 88%, transparent) 26%, color-mix(in srgb, var(--bg) 40%, transparent) 50%, transparent 70%),
+    linear-gradient(to bottom, rgb(0 0 0 / 0.5), transparent 20%),
+    radial-gradient(circle at 92% 82%, rgb(255 117 81 / 0.3), transparent 40%);
+}
+/* Statements and quotes over a photo: the fade climbs higher */
+.mde-hero-shade-full {
+  background:
+    linear-gradient(to top, var(--bg) 0%, color-mix(in srgb, var(--bg) 92%, transparent) 36%, color-mix(in srgb, var(--bg) 55%, transparent) 62%, color-mix(in srgb, var(--bg) 20%, transparent) 100%),
+    radial-gradient(circle at 90% 78%, rgb(255 117 81 / 0.3), transparent 44%);
+}
+.mde-bg-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* "O que é": emoji, then the coral example the arrow points to */
+.mde-emoji {
+  display: block;
+  font-size: 104px;
+  line-height: 1;
+}
+.mde-arrow {
+  display: block;
+  flex: none;
+  margin: 8px 0 8px 96px;
+}
+.mde-example {
+  padding: 36px 42px 40px;
+  border-radius: 28px;
+  background: var(--accent);
+  color: var(--accent-fg);
+}
+
+/* Quote without a photo: a promo gradient instead */
+.mde-quote-glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 85% 12%, rgb(255 117 81 / 0.42), transparent 46%),
+    radial-gradient(circle at 10% 92%, rgb(124 92 255 / 0.32), transparent 50%);
+}
+.mde-byline {
+  padding-left: 24px;
+  border-left: 5px solid var(--accent);
+}
+
+/* Q&A: a huge soft question mark behind */
+.mde-big-question {
+  position: absolute;
+  right: -60px;
+  top: 40px;
+  font-family: var(--font-barlow-condensed), sans-serif;
+  font-weight: 800;
+  font-size: 1300px;
+  line-height: 1;
+  color: var(--accent);
+  opacity: 0.1;
+  filter: blur(10px);
+  pointer-events: none;
+}
+.mde-qmark {
+  display: block;
+  color: var(--accent);
+  line-height: 0;
+}
+
+/* Grid and compare cards */
+.mde-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.mde-cell,
+.mde-side {
+  padding: 34px 34px 38px;
+  background: var(--surface);
+  border: 1.5px solid var(--mde-border);
+  border-radius: 28px;
+}
+.mde-cell-emoji {
+  display: block;
+  font-size: 62px;
+  line-height: 1;
+}
+.mde-compare {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.mde-side-hot {
+  background: var(--accent);
+  border-color: transparent;
+  color: var(--accent-fg);
+}
+.mde-side-points {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 24px;
+}
+.mde-side-points > * {
+  padding-top: 14px;
+  border-top: 1.5px solid var(--mde-border);
+}
+.mde-side-hot .mde-side-points > * {
+  border-top-color: rgb(0 0 0 / 0.16);
+}
+
+/* Versus: two left-aligned columns with a rule between them */
+.mde-versus {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 84px;
+}
+.mde-vs-col {
+  min-width: 0;
+}
+.mde-vs-photo {
+  position: relative;
+  height: 380px;
+  overflow: hidden;
+  border-radius: 24px;
+  background: var(--surface);
+}
+.slide .mde-vs-credit {
+  margin-top: 10px;
+  font-size: 18px;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.mde-vs-rule {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 2px;
+  translate: -1px 0;
+  background: var(--mde-border);
+}
+.mde-vs-rule b {
+  position: absolute;
+  top: 190px;
+  left: 50%;
+  translate: -50% -50%;
+  display: grid;
+  place-items: center;
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--accent-fg);
+  font-family: var(--font-barlow-condensed), sans-serif;
+  font-weight: 800;
+  font-size: 32px;
+}
+
+/* Chart: the label lives inside its bar */
+.mde-bars {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 22px 28px;
+  align-items: center;
+}
+.mde-bar {
+  display: flex;
+  align-items: center;
+  min-width: max-content;
+  height: 92px;
+  padding: 0 28px;
+  border-radius: 18px;
+  background: rgb(255 255 255 / 0.12);
+}
+.mde-bar-top {
+  background: var(--accent);
+  color: var(--accent-fg);
+}
